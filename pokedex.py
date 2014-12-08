@@ -32,5 +32,25 @@ def get_pokemon(poke_name):
     
 if sys.argv[1] == "pokemon":
     get_pokemon(sys.argv[2])
+elif sys.argv[1] == "type":
+    print("Searching for " + sys.argv[2]  + "...")
+    poke_type = pykemon.get(type_id=sys.argv[2])
+    print("Name: " + poke_type.name)
+    if len(poke_type.super_effective) > 0:
+        print("Super Effective Against:")
+        for strong in poke_type.super_effective:
+            print("\t" + strong)
+    if len(poke_type.ineffective) > 0:
+        print("Inefective against:")
+        for ineffective in poke_type.ineffective:
+            print("\t" + ineffective)
+    if len(poke_type.resistance) > 0:
+        print("Resistant to:")
+        for resist in poke_type.resistance:
+            print("\t" + resist)
+    if len(poke_type.weakness) > 0:
+        print("Weak to:")
+        for weak in poke_type.weakness:
+           print("\t" + weak)
 else:
     get_pokemon(sys.argv[1])
