@@ -2,7 +2,6 @@
 
 import pykemon
 import sys
-import ast
 
 def get_pokemon(poke_name):
     print("Searching for " + poke_name + "...")
@@ -32,6 +31,7 @@ def get_pokemon(poke_name):
     
 if sys.argv[1] == "pokemon":
     get_pokemon(sys.argv[2])
+    
 elif sys.argv[1] == "type":
     print("Searching for " + sys.argv[2]  + "...")
     poke_type = pykemon.get(type_id=sys.argv[2])
@@ -52,5 +52,22 @@ elif sys.argv[1] == "type":
         print("Weak to:")
         for weak in poke_type.weakness:
            print("\t" + weak)
+
+elif sys.argv[1] == "move":
+    print("Searching for move " + sys.argv[2] + "...")
+    poke_move = pykemon.get(move_id=sys.argv[2])
+    print("Name: " + poke_move.name)
+    print("Accuracy: " + str(poke_move.accuracy))
+    if len(poke_move.category) > 0:
+        print("Category: " + str(poke_move.category))
+    print("Power: " + str(poke_move.power))
+    print("PP: " + str(poke_move.pp))
+
+elif sys.argv[1] == "ability":
+    print("Searching for ability " + sys.argv[2] + "..")
+    poke_ability = pykemon.get(ability_id=sys.argv[2])
+    print("Name: " + poke_ability.name)
+    print("Description: " + poke_ability.description)
+           
 else:
     get_pokemon(sys.argv[1])
