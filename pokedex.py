@@ -26,12 +26,12 @@ class Application(Frame):
         self.poke_sprite_display = Canvas(width=120, height=120, bg='white')
         self.poke_sprite_display.create_image(60, 40, image=sprite)
         self.poke_sprite_display.image = sprite
-        self.poke_sprite_display.grid(column=0, row=0)
+        self.poke_sprite_display.grid(column=0, columnspan = 4, row=0, rowspan = 4)
         
         self.pokemon_name_label = Label(text="Pokemon Name:")
-        self.pokemon_name_label.grid(column=1, row=0)
+        self.pokemon_name_label.grid(column=4, row=0)
         self.pokemon_name = Label(text=pokemon.name)
-        self.pokemon_name.grid(column=2, row=0)
+        self.pokemon_name.grid(column=5, row=0)
         
 
 def get_pokemon(poke_name):
