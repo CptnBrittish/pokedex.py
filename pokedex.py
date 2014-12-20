@@ -47,6 +47,8 @@ def get_sprite(poke_num):
 
 if __name__ == "__main__":
     root = Tk()
+    img = PhotoImage(file='pokeball.png')
+    root.tk.call('wm', 'iconphoto', root._w, img)
     app = Application(root)
     app.master.title('Pokedex')
     app.mainloop()
