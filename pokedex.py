@@ -25,9 +25,9 @@ class Application(Frame):
         img = Image.open('temp.jpg')
         size = 120, 120
         img.thumbnail(size)
-        img.save('temp', "JPEG")
+        img.save('temp.png', "PNG")
         
-        image = Image.open('temp.jpg')
+        image = Image.open('temp.png')
         sprite = ImageTk.PhotoImage(image)
 
         self.poke_sprite_display = Canvas(width=120, height=120, bg='white')
