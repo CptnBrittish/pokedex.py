@@ -13,12 +13,28 @@ class Application(Frame):
         Frame.__init__(self, master)
 
         self.grid()
+        
+        self.search_frame = Frame()
+        self.search_frame.grid(column = 0, row = 0)
+        self.content_frame = Frame()
+        self.content_frame.grid(column = 0, row = 1)
+
+        self.is_pokemon_searched = 0
+        
         self.createWidgets()
 
-    def createPokemonWidgets(self, pokemon_to_serch):
-        self.pokemon_frame = Frame()
+    def has_pokemon_been_searched(self, pokemon):
+        if self.is_pokemon_searched == 1:
+            self.content_frame.grid_forget()
+        self.is_pokemon_searched = 1
+        self.content_frame.grid(column = 0, row = 1)
+        self.createPokemonWidgets(pokemon)
+                
+
+    def createPokemonWidgets(self, pokemon_to_search):
+        self.pokemon_frame = Frame(self.content_frame)
         self.pokemon_frame.grid(column = 0, row = 1)
-        pokemon = get_pokemon(pokemon_to_serch)
+        pokemon = get_pokemon(pokemon_to_search)
         pokemon_sprite = get_sprite(pokemon.id)
 
         sprite_file = open('temp.jpg', 'wb')
@@ -56,12 +72,11 @@ class Application(Frame):
         self.pokemon_type = Label(self.pokemon_frame, text=pokemon_types)
         self.pokemon_type.grid(column=2, row=1)
         
+        
     def createWidgets(self):
-        self.search_frame = Frame()
-        self.search_frame.grid(column=0, row=0)
         self.search_term = Entry(self.search_frame)
         self.search_term.grid(column=0, row=0)
-        self.search_button = Button(self.search_frame, text='Search', command=lambda: self.createPokemonWidgets(self.search_term.get()))
+        self.search_button = Button(self.search_frame, text='Search', command=lambda: self.has_pokemon_been_searched(self.search_term.get()))
         self.search_button.grid(column=1, row=0)
         
     
