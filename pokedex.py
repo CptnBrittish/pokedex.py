@@ -12,8 +12,8 @@ class Application(Frame):
         self.grid()
         self.createWidgets()
 
-    def createWidgets(self):
-        pokemon = get_pokemon(sys.argv[1])
+    def createPokemonWidgets(self, pokemon_to_serch):
+        pokemon = get_pokemon(pokemon_to_serch)
         pokemon_sprite = get_sprite(pokemon.id)
 
         sprite_file = open('temp.jpg', 'wb')
@@ -33,15 +33,15 @@ class Application(Frame):
         self.poke_sprite_display = Canvas(width=120, height=120, bg='white')
         self.poke_sprite_display.create_image(60, 60, image=sprite)
         self.poke_sprite_display.image = sprite
-        self.poke_sprite_display.grid(column=0, row=0, rowspan = 8)
+        self.poke_sprite_display.grid(column=0, row=1, rowspan = 8)
         
         self.pokemon_name_label = Label(text="Pokemon Name:")
-        self.pokemon_name_label.grid(column=1, row=0)
+        self.pokemon_name_label.grid(column=1, row=1)
         self.pokemon_name = Label(text=pokemon.name)
-        self.pokemon_name.grid(column=2, row=0)
+        self.pokemon_name.grid(column=2, row=1)
 
         self.pokemon_type_label = Label(text="Types:", anchor=S)
-        self.pokemon_type_label.grid(column=1, row=1)
+        self.pokemon_type_label.grid(column=1, row=2)
         pokemon_types = str()
         
         poke_types = list(pokemon.types)
@@ -49,7 +49,15 @@ class Application(Frame):
         for type in poke_types[1:]:
             pokemon_types = pokemon_types + ", " +  type
         self.pokemon_type = Label(text=pokemon_types)
-        self.pokemon_type.grid(column=2, row=1)
+        self.pokemon_type.grid(column=2, row=2)
+        
+    def createWidgets(self):
+        self.serch_term = Entry()
+        self.serch_term.grid(column=0, row=0)
+        self.serch_button = Button(text='Serch', command=lambda: self.createPokemonWidgets(self.serch_term.get()))
+        self.serch_button.grid(column=1, row=0)
+        
+    
         
 
 def get_pokemon(poke_name):
