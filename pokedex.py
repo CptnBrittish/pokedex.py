@@ -3,8 +3,11 @@
 import pykemon
 import sys
 import requests
+
 from tkinter import *
+from tkinter.ttk import *
 from PIL import Image, ImageTk
+
 class Application(Frame):
     def __init__(self, master=None):
         Frame.__init__(self, master)
