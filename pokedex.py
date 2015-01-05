@@ -77,6 +77,7 @@ class Application(Frame):
         self.search_term = Entry(self.search_frame)
         self.search_term.grid(column=0, row=0)
         self.search_button = Button(self.search_frame, text='Search', command=lambda: self.has_pokemon_been_searched(self.search_term.get()))
+        self.search_term.bind("<Return>", lambda event: self.has_pokemon_been_searched(self.search_term.get()))
         self.search_button.grid(column=1, row=0)
         
     
