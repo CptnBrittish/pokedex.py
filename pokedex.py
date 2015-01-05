@@ -35,7 +35,7 @@ class Application(Frame):
         self.pokemon_frame = Frame(self.content_frame)
         self.pokemon_frame.grid(column = 0, row = 1)
         pokemon = get_pokemon(pokemon_to_search)
-        pokemon_sprite = get_sprite(pokemon.id)
+        pokemon_sprite = get_sprite(pokemon.sprites[sorted(pokemon.sprites.keys())[0]][15:-1])
 
         sprite_file = open('temp.jpg', 'wb')
         sprite_url = requests.get('http://pokeapi.co/'+pokemon_sprite.image).content
