@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-import pykemon
-import sys
+import os
 import requests
+import get_pokemon_information
 
 from tkinter import *
 from tkinter.ttk import *
@@ -139,19 +139,25 @@ class Application(Frame):
 
 def get_pokemon(poke_name):
     print("Searching for " + poke_name + "...")
-    pokemon = pykemon.get(pokemon=poke_name)
-    print("Pokemon found, retreiving information...")
+    poke_info = get_pokemon_information.pokemon_information()
+    pokemon = poke_info.get(pokemon=poke_name)
     return pokemon
-
+    
 def get_sprite(poke_num):
-    pokemon_sprite = pykemon.get(sprite=poke_num)
+    print("Getting sprite for " + poke_num + "...")
+    poke_info = get_pokemon_information.pokemon_information()
+    pokemon_sprite = poke_info.get(sprite=poke_num)
     return pokemon_sprite
 
 def get_description(poke_des):
-    pokemon_description = pykemon.get(description=poke_des)
+    print("Getting description for " + poke_des + "...")
+    poke_info = get_pokemon_information.pokemon_information()
+    pokemon_description = poke_info.get(description=poke_des)
     return pokemon_description
 
 if __name__ == "__main__":
+    if not os.path.exists("cache"):
+        os.mkdir("cache")
     root = Tk()
     img = PhotoImage(file='pokeball.png')
     root.tk.call('wm', 'iconphoto', root._w, img)
