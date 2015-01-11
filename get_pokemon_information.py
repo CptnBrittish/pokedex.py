@@ -1,5 +1,6 @@
 import pykemon.request as poke_request
 from pykemon.request import CLASSES
+from PIL import Image
 
 import requests
 import os
@@ -46,3 +47,28 @@ class pokemon_information:
         data =  simplejson.loads(data_file)
         resource = CLASSES[resource_type]
         return resource(data)
+
+    def get_sprite(self, uri):
+        print("Getting sprite")
+        if not os.path.exists('cache/media'):
+            os.mkdir('cache/media')
+            os.mkdir('cache/media/image')
+        if glob.glob('cache/media/image/'+uri[11:]):
+            print("Getting sprite from file")
+            image = Image.open('cache/media/image/'+uri[11:])
+            return image
+        print("Retreiving Sprite from the internet")
+        sprite_file = open('cache/media/image/temp.png', 'wb')
+        sprite = requests.get('http://pokeapi.co/'+uri).content
+        sprite_file.write(sprite)
+        sprite_file.close()
+
+        #make sure all sprites are the same size
+        img = Image.open('cache/media/image/temp.png')
+        size = 120, 120
+        img.thumbnail(size)
+        img.save('cache/media/image/'+uri[11:], "PNG")
+        img.close()
+        
+        image = Image.open('cache/media/image/'+uri[11:])
+        return image

@@ -6,7 +6,8 @@ import get_pokemon_information
 
 from tkinter import *
 from tkinter.ttk import *
-from PIL import Image, ImageTk
+from PIL import ImageTk
+
 
 class Application(Frame):
     def __init__(self, master=None):
@@ -35,20 +36,9 @@ class Application(Frame):
         self.pokemon_frame = Frame(self.content_frame)
         self.pokemon_frame.grid(column = 0, row = 1)
         pokemon = get_pokemon(pokemon_to_search)
-        pokemon_sprite = get_sprite(pokemon.sprites[sorted(pokemon.sprites.keys())[0]][15:-1])
-
-        sprite_file = open('temp.jpg', 'wb')
-        sprite_url = requests.get('http://pokeapi.co/'+pokemon_sprite.image).content
-        sprite_file.write(sprite_url)
-        sprite_file.close()
-
-        #make sure all sprites are the same size
-        img = Image.open('temp.jpg')
-        size = 120, 120
-        img.thumbnail(size)
-        img.save('temp.png', "PNG")
-        
-        image = Image.open('temp.png')
+        poke_info = get_pokemon_information.pokemon_information()
+        sprite_info = get_sprite(pokemon.sprites[list(pokemon.sprites.keys())[0]][15:-1])
+        image = poke_info.get_sprite(sprite_info.image)
         sprite = ImageTk.PhotoImage(image)
 
         self.poke_sprite_display = Canvas(self.pokemon_frame, width=120, height=120, bg='white')
