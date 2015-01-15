@@ -140,7 +140,7 @@ class Application(Frame):
         pokemon_types = poke_types[0]
         for type in poke_types[1:]:
             pokemon_types = pokemon_types + ", " +  type
-        self.pokemon_types_var.set(pokemon_types)
+        self.pokemon_data.pokemon_types_var.set(pokemon_types)
 
         self.pokemon_data.pokemon_species_var.set(pokemon.species)
         self.pokemon_data.pokemon_height_var.set(str(pokemon.height))
