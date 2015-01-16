@@ -49,23 +49,23 @@ class Application(Frame):
 
         #Pokemon name
         self.pokemon_name_label = Label(self.pokemon_frame, text="Name:")
-        self.pokemon_name_label.grid(column=0, row=9)
+        self.pokemon_name_label.grid(column=0, row=11)
 
 
         self.pokemon_name = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_name_var)
-        self.pokemon_name.grid(column=1, row=9)
+        self.pokemon_name.grid(column=1, row=11)
 
         #pokemon gender
         self.pokemon_gender_label = Label(self.pokemon_frame, text="Gender:")
-        self.pokemon_gender_label.grid(column=0, row=10)
+        self.pokemon_gender_label.grid(column=0, row=12)
 
         #pokemon national id
         self.pokemon_number_label = Label(self.pokemon_frame, text="#")
-        self.pokemon_number_label.grid(column=3, row=10)
+        self.pokemon_number_label.grid(column=3, row=12)
 
 
         self.pokemon_number = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_number_var)
-        self.pokemon_number.grid(column = 4, row = 10)
+        self.pokemon_number.grid(column = 4, row = 12)
 
         #Pokemon types
         self.pokemon_type_label = Label(self.pokemon_frame, text="Type:", anchor=S)
