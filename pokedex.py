@@ -22,6 +22,7 @@ class Application(Frame):
         self.content_frame.grid(column = 0, row = 1)
 
         self.pokemon_data = self.pokemon_data()
+        self.poke_info = get_pokemon_information.pokemon_information()
         self.createPokemonWidgets()
         self.createWidgets()
 
@@ -124,11 +125,10 @@ class Application(Frame):
         self.pokemon_description.grid(column=5, row=10, columnspan=4, rowspan=4)
 
     def updatePokemonWidgets(self, poke_name):
-        pokemon = get_pokemon(poke_name)
-        poke_info = get_pokemon_information.pokemon_information()
-        sprite_info = get_sprite(pokemon.sprites[list(pokemon.sprites.keys())[0]][15:-1])
-        image = poke_info.get_sprite(sprite_info.image)
-        poke_description = get_description(pokemon.descriptions[sorted(pokemon.descriptions.keys())[0]][20:-1])
+        pokemon = self.poke_info.get(pokemon=poke_name)
+        sprite_info = self.poke_info.get(sprite=pokemon.sprites[list(pokemon.sprites.keys())[0]][15:-1])
+        image = self.poke_info.get_sprite(sprite_info.image)
+        poke_description = self.poke_info.get(description=pokemon.descriptions[sorted(pokemon.descriptions.keys())[0]][20:-1])
 
         self.pokemon_data.sprite.paste(image)
         self.pokemon_data.pokemon_name_var.set(pokemon.name)
@@ -156,27 +156,7 @@ class Application(Frame):
         self.search_button = Button(self.search_frame, text='Search', command=lambda: self.updatePokemonWidgets(self.search_term.get()))
         self.search_term.bind("<Return>", lambda event: self.updatePokemonWidgets(self.search_term.get()))
         self.search_button.grid(column=1, row=0)
-        
-    
-        
 
-def get_pokemon(poke_name):
-    print("Searching for " + poke_name + "...")
-    poke_info = get_pokemon_information.pokemon_information()
-    pokemon = poke_info.get(pokemon=poke_name)
-    return pokemon
-    
-def get_sprite(poke_num):
-    print("Getting sprite for " + poke_num + "...")
-    poke_info = get_pokemon_information.pokemon_information()
-    pokemon_sprite = poke_info.get(sprite=poke_num)
-    return pokemon_sprite
-
-def get_description(poke_des):
-    print("Getting description for " + poke_des + "...")
-    poke_info = get_pokemon_information.pokemon_information()
-    pokemon_description = poke_info.get(description=poke_des)
-    return pokemon_description
 
 if __name__ == "__main__":
     if not os.path.exists("cache"):
