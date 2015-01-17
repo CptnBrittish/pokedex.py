@@ -101,6 +101,7 @@ class Application(Frame):
         self.pokemon_abilities_label.grid(column=5, row=3)
 
         self.pokemon_abilities = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_abilities_var)
+        self.pokemon_abilities.grid(column=6, row=3)
 
         #Pokemon weaknesses
         self.pokemon_weaknesses_label = Label(self.pokemon_frame, text="Weaknesses:")
@@ -156,10 +157,15 @@ class Application(Frame):
                 pokemon_weakness = pokemon_weakness + ", " + weakness
         self.pokemon_data.pokemon_weaknesses_var.set(pokemon_weakness)
 
+        pokemon_abilities = list(pokemon.abilities.keys())[0]
+        for abilities in list(pokemon.abilities.keys())[1:]:
+            pokemon_abilities = pokemon_abilities + ", " + abilities
+        self.pokemon_data.pokemon_abilities_var.set(pokemon_abilities)
+        
+
         self.pokemon_data.pokemon_species_var.set(pokemon.species)
         self.pokemon_data.pokemon_height_var.set(str(pokemon.height))
         self.pokemon_data.pokemon_weight_var.set(str(pokemon.weight))
-        self.pokemon_data.pokemon_abilities_var.set(pokemon.abilities)
         self.pokemon_data.pokemon_description_var.set(poke_description.description)
 
         
