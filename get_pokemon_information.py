@@ -65,6 +65,7 @@ class pokemon_information:
 
         #make sure all sprites are the same size
         img = Image.open('cache/media/image/temp.png')
+        print(img.mode)
         size = 120, 120
         img.thumbnail(size)
         img.save('cache/media/image/'+uri[11:], "PNG")

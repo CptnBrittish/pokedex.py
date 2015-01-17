@@ -28,7 +28,7 @@ class Application(Frame):
 
     class pokemon_data:
         def __init__(self):
-            self.sprite = ImageTk.PhotoImage(Image.new("RGB", (120,120), 'White'))
+            self.sprite = ImageTk.PhotoImage(Image.new("RGBA", (120,120), 'White'))
             self.pokemon_name_var = StringVar()
             self.pokemon_number_var = StringVar()
             self.pokemon_types_var = StringVar()
