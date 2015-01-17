@@ -37,6 +37,7 @@ class Application(Frame):
             self.pokemon_weight_var = StringVar()
             self.pokemon_abilities_var = StringVar()
             self.pokemon_description_var = StringVar()
+            self.pokemon_weaknesses_var = StringVar()
 
     def createPokemonWidgets(self):
         self.pokemon_frame = Frame(self.content_frame)
@@ -105,6 +106,9 @@ class Application(Frame):
         self.pokemon_weaknesses_label = Label(self.pokemon_frame, text="Weaknesses:")
         self.pokemon_weaknesses_label.grid(column=5, row=4)
 
+        self.pokemon_weakness = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_weaknesses_var)
+        self.pokemon_weakness.grid(column=6, row=4)
+
         #Stats
         self.pokemon_hp_label = Label(self.pokemon_frame, text="HP")
         self.pokemon_hp_label.grid(column=5, row=5)
@@ -126,6 +130,8 @@ class Application(Frame):
 
     def updatePokemonWidgets(self, poke_name):
         pokemon = self.poke_info.get(pokemon=poke_name)
+
+        poke_type = self.poke_info.get(type=pokemon.types[list(pokemon.types.keys())[0]][13:-1])
         sprite_info = self.poke_info.get(sprite=pokemon.sprites[list(pokemon.sprites.keys())[0]][15:-1])
         image = self.poke_info.get_sprite(sprite_info.image)
         poke_description = self.poke_info.get(description=pokemon.descriptions[sorted(pokemon.descriptions.keys())[0]][20:-1])
@@ -141,6 +147,14 @@ class Application(Frame):
         for type in poke_types[1:]:
             pokemon_types = pokemon_types + ", " +  type
         self.pokemon_data.pokemon_types_var.set(pokemon_types)
+
+        pokemon_weakness = str()
+        for type in list(pokemon.types.keys()):
+            poke_type = self.poke_info.get(type=pokemon.types[type][13:-1])
+            pokemon_weakness = list(poke_type.weakness.keys())[0]
+            for weakness in list(poke_type.weakness.keys())[1:]:
+                pokemon_weakness = pokemon_weakness + ", " + weakness
+        self.pokemon_data.pokemon_weaknesses_var.set(pokemon_weakness)
 
         self.pokemon_data.pokemon_species_var.set(pokemon.species)
         self.pokemon_data.pokemon_height_var.set(str(pokemon.height))
