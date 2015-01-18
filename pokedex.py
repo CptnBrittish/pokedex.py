@@ -30,6 +30,7 @@ class Application(Frame):
         def __init__(self):
             self.sprite = ImageTk.PhotoImage(Image.new("RGBA", (120,120), 'White'))
             self.pokemon_name_var = StringVar()
+            self.pokemon_gender_var = StringVar()
             self.pokemon_number_var = StringVar()
             self.pokemon_types_var = StringVar()
             self.pokemon_species_var = StringVar()
@@ -57,8 +58,11 @@ class Application(Frame):
         self.pokemon_name.grid(column=1, row=11)
 
         #pokemon gender
-        self.pokemon_gender_label = Label(self.pokemon_frame, text="Gender:")
+        self.pokemon_gender_label = Label(self.pokemon_frame, text="Gender Ratio:")
         self.pokemon_gender_label.grid(column=0, row=12)
+
+        self.pokemon_gender = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_gender_var)
+        self.pokemon_gender.grid(column=1, row=12)
 
         #pokemon national id
         self.pokemon_number_label = Label(self.pokemon_frame, text="#")
@@ -141,6 +145,11 @@ class Application(Frame):
         self.pokemon_data.pokemon_name_var.set(pokemon.name)
         self.pokemon_data.pokemon_number_var.set(pokemon.id)
 
+        if pokemon.male_female_ratio:
+            self.pokemon_data.pokemon_gender_var.set(str(pokemon.male_female_ratio))
+        else:
+            self.pokemon_data.pokemon_gender_var.set("Genderless")
+        
         pokemon_types = str()
         
         poke_types = list(pokemon.types)
@@ -162,8 +171,10 @@ class Application(Frame):
             pokemon_abilities = pokemon_abilities + ", " + abilities
         self.pokemon_data.pokemon_abilities_var.set(pokemon_abilities)
         
-
-        self.pokemon_data.pokemon_species_var.set(pokemon.species)
+        if pokemon.species:
+            self.pokemon_data.pokemon_species_var.set(pokemon.species)
+        else:
+            self.pokemon_data.pokemon_species_var.set("New Species")
         self.pokemon_data.pokemon_height_var.set(str(pokemon.height))
         self.pokemon_data.pokemon_weight_var.set(str(pokemon.weight))
         self.pokemon_data.pokemon_description_var.set(poke_description.description)
