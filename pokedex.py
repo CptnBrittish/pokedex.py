@@ -155,7 +155,7 @@ class Application(Frame):
         #description
 
         self.pokemon_description = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_description_var, wraplength=160)
-        self.pokemon_description.grid(column=5, row=10, columnspan=4, rowspan=4)
+        self.pokemon_description.grid(column=5, row=11, columnspan=4, rowspan=4)
 
     def updatePokemonWidgets(self, poke_name):
         pokemon = self.poke_info.get(pokemon=poke_name)
