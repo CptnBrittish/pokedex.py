@@ -15,16 +15,16 @@ class pokemon_information:
             print("Creating Directory for reasource")
             os.mkdir("cache/"+resource_type)
 
-        if glob.glob("cache/"+resource_type+"/"+name+" -*.json"):
+        if glob.glob("cache/"+resource_type+"/"+name.title()+" -*.json"):
             print("Getting resource from file")
-            data_file = open(glob.glob("cache/"+resource_type+"/"+name+" -*.json")[0])
+            data_file = open(glob.glob("cache/"+resource_type+"/"+name.title()+" -*.json")[0])
             data = self.get_data_as_data(data_file.read(), resource_type)
             data_file.close()
             return data
         
-        if glob.glob("cache/"+resource_type+"/*- "+name+".json"):
+        if glob.glob("cache/"+resource_type+"/*- "+name.title()+".json"):
             print("Getting resource from file")
-            data_file = open(glob.glob("cache/"+resource_type+"/*- "+name+".json")[0])
+            data_file = open(glob.glob("cache/"+resource_type+"/*- "+name.title()+".json")[0])
             data = self.get_data_as_data(data_file.read(), resource_type)
             data_file.close()
             return data
@@ -40,7 +40,7 @@ class pokemon_information:
 
     def get_data_json(self,choice):
         uri, nchoice = poke_request._compose(choice)
-        data = requests.get(uri)
+        data = requests.get(uri.lower())
         return data.text
 
     def get_data_as_data(self,data_file,resource_type):
