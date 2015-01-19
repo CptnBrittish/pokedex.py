@@ -40,6 +40,13 @@ class Application(Frame):
             self.pokemon_description_var = StringVar()
             self.pokemon_weaknesses_var = StringVar()
 
+            self.pokemon_attack_var = StringVar()
+            self.pokemon_sp_attack_var = StringVar()
+            self.pokemon_defense_var = StringVar()
+            self.pokemon_sp_defense_var = StringVar()
+            self.pokemon_hp_var = StringVar()
+            self.pokemon_speed_var = StringVar()
+
     def createPokemonWidgets(self):
         self.pokemon_frame = Frame(self.content_frame)
         self.pokemon_frame.grid(column = 0, row = 1)
@@ -117,16 +124,33 @@ class Application(Frame):
         #Stats
         self.pokemon_hp_label = Label(self.pokemon_frame, text="HP")
         self.pokemon_hp_label.grid(column=5, row=5)
+        self.pokemon_hp = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_hp_var)
+        self.pokemon_hp.grid(column=5, row=6)
+        
         self.pokemon_defense_label = Label(self.pokemon_frame, text="Defense")
         self.pokemon_defense_label.grid(column=5, row=7)
+        self.pokemon_defense = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_defense_var)
+        self.pokemon_defense.grid(column=5, row=8)
+        
         self.pokemon_attack_label = Label(self.pokemon_frame, text="Attack")
         self.pokemon_attack_label.grid(column=5, row=9)
+        self.pokemon_attack = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_attack_var)
+        self.pokemon_attack.grid(column=5, row=10)
+        
         self.pokemon_speed_label = Label(self.pokemon_frame, text="Speed")
         self.pokemon_speed_label.grid(column=6, row=5)
+        self.pokemon_speed = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_speed_var)
+        self.pokemon_speed.grid(column=6, row=6)
+        
         self.pokemon_sp_defense_label = Label(self.pokemon_frame, text="Sp Defense")
         self.pokemon_sp_defense_label.grid(column=6, row=7)
+        self.pokemon_sp_defense = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_sp_defense_var)
+        self.pokemon_sp_defense.grid(column=6, row=8)
+        
         self.pokemon_sp_attack_label = Label(self.pokemon_frame, text="Sp Attack")
         self.pokemon_sp_attack_label.grid(column=6, row=9)
+        self.pokemon_sp_attack = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_sp_attack_var)
+        self.pokemon_sp_attack.grid(column=6, row=10)
         
         #description
 
@@ -179,7 +203,12 @@ class Application(Frame):
         self.pokemon_data.pokemon_weight_var.set(str(pokemon.weight))
         self.pokemon_data.pokemon_description_var.set(poke_description.description)
 
-        
+        self.pokemon_data.pokemon_hp_var.set(str(pokemon.hp))
+        self.pokemon_data.pokemon_speed_var.set(str(pokemon.speed))
+        self.pokemon_data.pokemon_attack_var.set(str(pokemon.attack))
+        self.pokemon_data.pokemon_sp_attack_var.set(str(pokemon.sp_atk))
+        self.pokemon_data.pokemon_defense_var.set(str(pokemon.defense))
+        self.pokemon_data.pokemon_sp_defense_var.set(str(pokemon.sp_def))
         
     def createWidgets(self):
         self.search_term = Entry(self.search_frame)
