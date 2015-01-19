@@ -172,7 +172,7 @@ class Application(Frame):
         self.pokemon_data.pokemon_abilities_var.set(pokemon_abilities)
         
         if pokemon.species:
-            self.pokemon_data.pokemon_species_var.set(pokemon.species)
+            self.pokemon_data.pokemon_species_var.set(pokemon.species.title())
         else:
             self.pokemon_data.pokemon_species_var.set("New Species")
         self.pokemon_data.pokemon_height_var.set(str(pokemon.height))
