@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import os
-import requests
 import get_pokemon_information
 
 from tkinter import *
@@ -17,20 +16,18 @@ class Application(Frame):
         self.grid()
         self.pokemon_data = self.pokemon_data()
         self.poke_info = get_pokemon_information.pokemon_information()
-        
 
         self.search_frame = Frame()
-        self.search_frame.grid(column = 0, row = 0)
+        self.search_frame.grid(column=0, row=0)
         self.content_frame = Frame()
-        self.content_frame.grid(column = 0, row = 1)
-
+        self.content_frame.grid(column=0, row=1)
 
         self.createPokemonWidgets()
         self.createWidgets()
 
     class pokemon_data:
         def __init__(self):
-            self.sprite = ImageTk.PhotoImage(Image.new("RGBA", (120,120), 'White'))
+            self.sprite = ImageTk.PhotoImage(Image.new("RGBA", (120, 120), 'White'))
             self.pokemon_name_var = StringVar()
             self.pokemon_gender_var = StringVar()
             self.pokemon_number_var = StringVar()
@@ -51,110 +48,107 @@ class Application(Frame):
 
     def createPokemonWidgets(self):
         self.pokemon_frame = Frame(self.content_frame)
-        self.pokemon_frame.grid(column = 0, row = 1)
+        self.pokemon_frame.grid(column=0, row=1)
 
         self.poke_sprite_display = Canvas(self.pokemon_frame, width=120, height=120, bg='white')
         self.poke_sprite_display.create_image(60, 60, image=self.pokemon_data.sprite)
         self.poke_sprite_display.image = self.pokemon_data.sprite
-        self.poke_sprite_display.grid(column=0,columnspan=4, row=0, rowspan = 11)
+        self.poke_sprite_display.grid(column=0, columnspan=4, row=0, rowspan=11)
 
-        #Pokemon name
+        # Pokemon name
         self.pokemon_name_label = Label(self.pokemon_frame, text="Name:")
         self.pokemon_name_label.grid(column=0, row=11)
-
 
         self.pokemon_name = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_name_var)
         self.pokemon_name.grid(column=1, row=11)
 
-        #pokemon gender
+        # Pokemon gender
         self.pokemon_gender_label = Label(self.pokemon_frame, text="Gender Ratio:")
         self.pokemon_gender_label.grid(column=0, row=12)
 
         self.pokemon_gender = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_gender_var)
         self.pokemon_gender.grid(column=1, row=12)
 
-        #pokemon national id
+        # Pokemon national id
         self.pokemon_number_label = Label(self.pokemon_frame, text="#")
         self.pokemon_number_label.grid(column=3, row=12)
 
-
         self.pokemon_number = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_number_var)
-        self.pokemon_number.grid(column = 4, row = 12)
+        self.pokemon_number.grid(column=4, row=12)
 
-        #Pokemon types
+        # Pokemon types
         self.pokemon_type_label = Label(self.pokemon_frame, text="Type:", anchor=S)
         self.pokemon_type_label.grid(column=5, row=0)
-        
 
         self.pokemon_type = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_types_var)
         self.pokemon_type.grid(column=6, row=0)
 
-        #Pokemon Species
+        # Pokemon Species
         self.pokemon_species_label = Label(self.pokemon_frame, text="Species:")
         self.pokemon_species_label.grid(column=5, row=1)
 
         self.pokemon_species = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_species_var)
         self.pokemon_species.grid(column=6, row=1)
 
-        #height and weight
+        # Height and Weight
         self.pokemon_height_label = Label(self.pokemon_frame, text="Height:")
         self.pokemon_height_label.grid(column=5, row=2)
 
         self.pokemon_height = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_height_var)
         self.pokemon_height.grid(column=6, row=2)
-        
+
         self.pokemon_weight_label = Label(self.pokemon_frame, text="Weight:")
         self.pokemon_weight_label.grid(column=7, row=2)
 
         self.pokemon_weight = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_weight_var)
         self.pokemon_weight.grid(column=8, row=2)
 
-        #Pokemon Abilities
+        # Pokemon Abilities
         self.pokemon_abilities_label = Label(self.pokemon_frame, text="Abilities:")
         self.pokemon_abilities_label.grid(column=5, row=3)
 
         self.pokemon_abilities = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_abilities_var)
         self.pokemon_abilities.grid(column=6, row=3)
 
-        #Pokemon weaknesses
+        # Pokemon weaknesses
         self.pokemon_weaknesses_label = Label(self.pokemon_frame, text="Weaknesses:")
         self.pokemon_weaknesses_label.grid(column=5, row=4)
 
         self.pokemon_weakness = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_weaknesses_var)
         self.pokemon_weakness.grid(column=6, row=4)
 
-        #Stats
+        # Stats
         self.pokemon_hp_label = Label(self.pokemon_frame, text="HP")
         self.pokemon_hp_label.grid(column=5, row=5)
         self.pokemon_hp = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_hp_var)
         self.pokemon_hp.grid(column=5, row=6)
-        
+
         self.pokemon_defense_label = Label(self.pokemon_frame, text="Defense")
         self.pokemon_defense_label.grid(column=5, row=7)
         self.pokemon_defense = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_defense_var)
         self.pokemon_defense.grid(column=5, row=8)
-        
+
         self.pokemon_attack_label = Label(self.pokemon_frame, text="Attack")
         self.pokemon_attack_label.grid(column=5, row=9)
         self.pokemon_attack = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_attack_var)
         self.pokemon_attack.grid(column=5, row=10)
-        
+
         self.pokemon_speed_label = Label(self.pokemon_frame, text="Speed")
         self.pokemon_speed_label.grid(column=6, row=5)
         self.pokemon_speed = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_speed_var)
         self.pokemon_speed.grid(column=6, row=6)
-        
+
         self.pokemon_sp_defense_label = Label(self.pokemon_frame, text="Sp Defense")
         self.pokemon_sp_defense_label.grid(column=6, row=7)
         self.pokemon_sp_defense = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_sp_defense_var)
         self.pokemon_sp_defense.grid(column=6, row=8)
-        
+
         self.pokemon_sp_attack_label = Label(self.pokemon_frame, text="Sp Attack")
         self.pokemon_sp_attack_label.grid(column=6, row=9)
         self.pokemon_sp_attack = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_sp_attack_var)
         self.pokemon_sp_attack.grid(column=6, row=10)
-        
-        #description
+
+        # Description
 
         self.pokemon_description = Label(self.pokemon_frame, textvariable=self.pokemon_data.pokemon_description_var, wraplength=160)
         self.pokemon_description.grid(column=5, row=11, columnspan=4, rowspan=4)
@@ -175,13 +169,13 @@ class Application(Frame):
             self.pokemon_data.pokemon_gender_var.set(str(pokemon.male_female_ratio))
         else:
             self.pokemon_data.pokemon_gender_var.set("Genderless")
-        
+
         pokemon_types = str()
-        
+
         poke_types = list(pokemon.types)
         pokemon_types = poke_types[0]
         for type in poke_types[1:]:
-            pokemon_types = pokemon_types + ", " +  type
+            pokemon_types = pokemon_types + ", " + type
         self.pokemon_data.pokemon_types_var.set(pokemon_types)
 
         pokemon_weakness = str()
@@ -196,7 +190,7 @@ class Application(Frame):
         for abilities in list(pokemon.abilities.keys())[1:]:
             pokemon_abilities = pokemon_abilities + ", " + abilities
         self.pokemon_data.pokemon_abilities_var.set(pokemon_abilities)
-        
+
         if pokemon.species:
             self.pokemon_data.pokemon_species_var.set(pokemon.species.title())
         else:
@@ -211,7 +205,7 @@ class Application(Frame):
         self.pokemon_data.pokemon_sp_attack_var.set(str(pokemon.sp_atk))
         self.pokemon_data.pokemon_defense_var.set(str(pokemon.defense))
         self.pokemon_data.pokemon_sp_defense_var.set(str(pokemon.sp_def))
-        
+
     def createWidgets(self):
         self.search_term = Entry(self.search_frame)
         self.search_term.grid(column=0, row=0)

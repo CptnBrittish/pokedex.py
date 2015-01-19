@@ -7,6 +7,7 @@ import os
 import simplejson
 import glob
 
+
 class pokemon_information:
 
     def buildCache(self):
@@ -22,7 +23,6 @@ class pokemon_information:
             except IndexError:
                 print("No sprite avaliable")
         print("Finished Building Cache")
-        
 
     def get(self, **choice):
         name = choice[list(choice.keys())[0]]
@@ -41,42 +41,41 @@ class pokemon_information:
             else:
                 print("Retreiving resource from internet")
                 data = self.get_data_json(choice)
-                resource = self.get_data_as_data(data,resource_type)
+                resource = self.get_data_as_data(data, resource_type)
                 data_file = open("cache/"+resource_type+"/national.json", 'w+')
                 data_file.write(data)
                 data_file.close()
                 return resource
-        
+
         elif glob.glob("cache/"+resource_type+"/"+name.title()+" -*.json"):
             print("Getting resource from file")
             data_file = open(glob.glob("cache/"+resource_type+"/"+name.title()+" -*.json")[0])
             data = self.get_data_as_data(data_file.read(), resource_type)
             data_file.close()
             return data
-        
+
         elif glob.glob("cache/"+resource_type+"/*- "+name.title()+".json"):
             print("Getting resource from file")
             data_file = open(glob.glob("cache/"+resource_type+"/*- "+name.title()+".json")[0])
             data = self.get_data_as_data(data_file.read(), resource_type)
             data_file.close()
             return data
-        
+
         print("Retreiving resource from internet")
         data = self.get_data_json(choice)
-        resource = self.get_data_as_data(data,resource_type)
+        resource = self.get_data_as_data(data, resource_type)
         data_file = open("cache/"+resource_type+"/"+str(resource.id)+" - "+resource.name+".json", 'w+')
         data_file.write(data)
         data_file.close()
         return resource
 
-
-    def get_data_json(self,choice):
+    def get_data_json(self, choice):
         uri, nchoice = poke_request._compose(choice)
         data = requests.get(uri.lower())
         return data.text
 
-    def get_data_as_data(self,data_file,resource_type):
-        data =  simplejson.loads(data_file)
+    def get_data_as_data(self, data_file, resource_type):
+        data = simplejson.loads(data_file)
         resource = CLASSES[resource_type]
         return resource(data)
 
@@ -95,14 +94,13 @@ class pokemon_information:
         sprite_file.write(sprite)
         sprite_file.close()
 
-        #make sure all sprites are the same size
+        # Make sure all sprites are the same size
         img = Image.open('cache/media/image/temp.png')
         print(img.mode)
         size = 120, 120
         img.thumbnail(size)
         img.save('cache/media/image/'+uri[11:], "PNG")
         img.close()
-        
+
         image = Image.open('cache/media/image/'+uri[11:])
         return image
-
