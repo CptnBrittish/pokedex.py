@@ -15,14 +15,16 @@ class Application(Frame):
         Frame.__init__(self, master)
 
         self.grid()
+        self.pokemon_data = self.pokemon_data()
+        self.poke_info = get_pokemon_information.pokemon_information()
         
+
         self.search_frame = Frame()
         self.search_frame.grid(column = 0, row = 0)
         self.content_frame = Frame()
         self.content_frame.grid(column = 0, row = 1)
 
-        self.pokemon_data = self.pokemon_data()
-        self.poke_info = get_pokemon_information.pokemon_information()
+
         self.createPokemonWidgets()
         self.createWidgets()
 
@@ -222,6 +224,10 @@ if __name__ == "__main__":
     if not os.path.exists("cache"):
         os.mkdir("cache")
     root = Tk()
+    poke_info = get_pokemon_information.pokemon_information()
+    menubar = Menu(root)
+    menubar.add_command(label='Build Cache', command=poke_info.buildCache)
+    root.config(menu=menubar)
     img = PhotoImage(file='pokeball.png')
     root.tk.call('wm', 'iconphoto', root._w, img)
     app = Application(root)
