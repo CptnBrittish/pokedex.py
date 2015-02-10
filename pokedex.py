@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import os
 import get_pokemon_information
@@ -157,8 +157,11 @@ class Application(Frame):
         pokemon = self.poke_info.get(pokemon=poke_name)
 
         poke_type = self.poke_info.get(type=pokemon.types[list(pokemon.types.keys())[0]][13:-1])
-        sprite_info = self.poke_info.get(sprite=pokemon.sprites[list(pokemon.sprites.keys())[0]][15:-1])
-        image = self.poke_info.get_sprite(sprite_info.image)
+        try:
+            sprite_info = self.poke_info.get(sprite=pokemon.sprites[list(pokemon.sprites.keys())[0]][15:-1])
+            image = self.poke_info.get_sprite(sprite_info.image)
+        except IndexError:
+            print("No sprite avaiable")
         poke_description = self.poke_info.get(description=pokemon.descriptions[sorted(pokemon.descriptions.keys())[0]][20:-1])
 
         self.pokemon_data.sprite.paste(image)
