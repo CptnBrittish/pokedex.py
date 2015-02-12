@@ -237,7 +237,7 @@ class Application(Frame):
             image = self.poke_info.get_sprite(sprite_info.image)
         except IndexError:
             print("No sprite avaiable")
-        poke_description = self.poke_info.get(description=pokemon.descriptions[sorted(pokemon.descriptions.keys())[0]][20:-1])
+        poke_description = self.poke_info.get(description=pokemon.descriptions[sorted(pokemon.descriptions.keys())[0]][-1])
 
         self.pokemon_data.sprite.paste(image)
         self.pokemon_data.pokemon_name_var.set(pokemon.name)
