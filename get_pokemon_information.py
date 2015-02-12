@@ -84,6 +84,7 @@ class pokemon_information:
         if not os.path.exists('cache/media'):
             os.mkdir('cache/media')
             os.mkdir('cache/media/image')
+
         if glob.glob('cache/media/image/'+uri[11:]):
             print("Getting sprite from file")
             image = Image.open('cache/media/image/'+uri[11:])
