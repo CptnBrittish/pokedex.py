@@ -15,7 +15,10 @@ class pokemon_information:
         pokedex = self.get(pokedex=1)
         for pokemon in pokedex.pokemon.keys():
             pokemon = self.get(pokemon=pokedex.pokemon[pokemon][15:-1])
-            self.get(description=pokemon.descriptions[sorted(pokemon.descriptions.keys())[-1]][20:-1]
+            try:
+                self.get(description=pokemon.descriptions[sorted(pokemon.descriptions.keys())[-1]][20:-1])
+            except IndexError:
+                print("No Description Avaliable")
             for types in pokemon.types.keys():
                 self.get(type=pokemon.types[types][13:-1])
             try:
