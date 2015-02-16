@@ -109,3 +109,24 @@ class pokemon_information:
 
         image = Image.open('cache/media/image/'+uri[11:])
         return image
+
+    def getNotes(self, id):
+        id = str(id)
+        print("Getting Notes")
+        if not os.path.exists('cache/notes'):
+            os.mkdir('cache/notes')
+        if glob.glob('cache/notes/'+id+'.txt'):
+            print("Getting note from file")
+            note = open('cache/notes/'+id+'.txt', 'r')
+            contents = note.read()
+            return contents
+        print("Cannot find note file creating one")
+        note = open('cache/notes/'+id+'.txt', 'a')
+        # We cant read from a blank file so just return a empty string
+        return ""
+        
+    def writeNotes(self, id, contents):
+        print("Writing notes")
+        note = open('cache/notes/'+id+'.txt', 'w')
+        note.write(contents)
+        note.close()

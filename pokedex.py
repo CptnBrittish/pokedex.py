@@ -5,6 +5,7 @@ import get_pokemon_information
 
 from tkinter import *
 from tkinter.ttk import *
+import tkinter.scrolledtext as tkst
 from PIL import ImageTk
 from PIL import Image
 
@@ -67,8 +68,12 @@ class Application(Frame):
     class pokemon_frames(Frame):
         def __init__(self, content_frame):
             self.content_frame = content_frame
-            self.pokemon_frame = Frame(self.content_frame)
-            self.pokemon_frame.grid(column=0, row=1)
+            self.pokemon_tabs = Notebook(self.content_frame)
+            self.pokemon_tabs.grid(sticky=N+S+E+W)
+
+            # Main Pokemon Information
+            self.pokemon_frame = Frame(self.pokemon_tabs)
+            self.pokemon_tabs.add(self.pokemon_frame, text="Basic Information", state='normal')
             self.abilities_frame = Frame(self.pokemon_frame)
             self.abilities_frame.grid(column=1, row = 4)
             self.basic_info_frame = Frame(self.pokemon_frame)
@@ -81,6 +86,14 @@ class Application(Frame):
             self.evolution_frame.grid(column=0, columnspan=2, row=3)
             self.egg_frame = Frame(self.pokemon_frame)
             self.egg_frame.grid(column=0, row=4)
+
+            # Related to moves
+            self.move_frame = Frame(self.pokemon_tabs)
+            self.pokemon_tabs.add(self.move_frame, text="Moves")
+
+            # for the notes for each pokemon
+            self.note_frame = Frame(self.pokemon_tabs)
+            self.pokemon_tabs.add(self.note_frame, text="Notes")
 
     def createPokemonWidgets(self):
 
@@ -181,7 +194,7 @@ class Application(Frame):
 
 
         # Evolutions
-        self.evolution_label = Label(self.pokemon_frames.evolution_frame, text="Evolutions", background='green')
+        self.evolution_label = Label(self.pokemon_frames.evolution_frame, text="Evolutions")
         self.evolution_label.grid(row=0, sticky=W+E)
 
 
@@ -203,6 +216,10 @@ class Application(Frame):
         # Pokemon Abilities
         self.pokemon_abilities_label = Label(self.pokemon_frames.abilities_frame, text="Abilities")
         self.pokemon_abilities_label.grid(column=0, row=0, columnspan=2)
+
+        #Notes
+        self.pokemon_notes = tkst.ScrolledText(self.pokemon_frames.note_frame)
+        self.pokemon_notes.grid(column=0, row=0)
 
 
 
@@ -227,7 +244,6 @@ class Application(Frame):
         
         '''
         
-
     def updatePokemonWidgets(self, poke_name):
         pokemon = self.poke_info.get(pokemon=poke_name)
 
@@ -237,8 +253,12 @@ class Application(Frame):
             image = self.poke_info.get_sprite(sprite_info.image)
         except IndexError:
             print("No sprite avaiable")
-        poke_description = self.poke_info.get(description=pokemon.descriptions[sorted(pokemon.descriptions.keys())[0]][-1])
+        poke_description = self.poke_info.get(description=pokemon.descriptions[sorted(pokemon.descriptions.keys())[-1]][20:-1])
 
+        # First save and load notes
+        if self.pokemon_data.pokemon_number_var.get() != "":
+            poke_info.writeNotes(self.pokemon_data.pokemon_number_var.get(), self.pokemon_notes.get('1.0', END+'-1c'))
+        self.pokemon_notes.insert('1.0', poke_info.getNotes(pokemon.id))
         self.pokemon_data.sprite.paste(image)
         self.pokemon_data.pokemon_name_var.set(pokemon.name)
         self.pokemon_data.pokemon_number_var.set(pokemon.id)
@@ -318,20 +338,21 @@ class Application(Frame):
         i = 0
         for evolutions in pokemon.evolutions:
             pokemon_evolution = poke_info.get(pokemon=pokemon.evolutions[evolutions][16:-1])
-            print(pokemon_evolution.sprites[list(pokemon_evolution.sprites.keys())[0]])
-            evolution_sprite_info = poke_info.get(sprite=pokemon_evolution.sprites[list(pokemon_evolution.sprites.keys())[0]][15:-1])
-            evolution_sprite = poke_info.get_sprite(evolution_sprite_info.image)
-            evolution_sprite.thumbnail((80,80))
-            evolution_sprite = ImageTk.PhotoImage(evolution_sprite)
+            try:
+                evolution_sprite_info = poke_info.get(sprite=pokemon_evolution.sprites[list(pokemon_evolution.sprites.keys())[-1]][15:-1])
+                evolution_sprite = poke_info.get_sprite(evolution_sprite_info.image)
+                evolution_sprite.thumbnail((80,80))
+                evolution_sprite = ImageTk.PhotoImage(evolution_sprite)
             
-            self.pokemon_data.pokemon_evolution_display_image.append(evolution_sprite)
+                self.pokemon_data.pokemon_evolution_display_image.append(evolution_sprite)
 
-            poke_sprite_display = Canvas(self.pokemon_frames.evolution_frame, width=80, height=80, bg='white')
-            poke_sprite_display.create_image(40, 40, image=self.pokemon_data.pokemon_evolution_display_image[-1])
-            poke_sprite_display.image = self.pokemon_data.pokemon_evolution_display_image[-1]
-            self.pokemon_data.pokemon_evolution_sprite.append(poke_sprite_display)
-            poke_sprite_display.grid(column=i, row=1)
-
+                poke_sprite_display = Canvas(self.pokemon_frames.evolution_frame, width=80, height=80, bg='white')
+                poke_sprite_display.create_image(40, 40, image=self.pokemon_data.pokemon_evolution_display_image[-1])
+                poke_sprite_display.image = self.pokemon_data.pokemon_evolution_display_image[-1]
+                self.pokemon_data.pokemon_evolution_sprite.append(poke_sprite_display)
+                poke_sprite_display.grid(column=i, row=1)
+            except IndexError:
+                print("No sprite avablible")
             label = Label(self.pokemon_frames.evolution_frame, text=pokemon_evolution.name)
             self.pokemon_data.pokemon_evolution_name.append(label)
             label.grid(column=i, row=2)
