@@ -50,8 +50,7 @@ class Application(Frame):
             self.pokemon_abilities_description_label = []
 
             self.pokemon_evolution_display_image = []
-            self.pokemon_evolution_sprite = []
-            self.pokemon_evolution_name = []
+            self.pokemon_evolution_button = []
 
             
             self.pokemon_attack_var = StringVar()
@@ -312,17 +311,11 @@ class Application(Frame):
             
                 self.pokemon_data.pokemon_evolution_display_image.append(evolution_sprite)
 
-                poke_sprite_display = Canvas(self.pokemon_frames.evolution_frame, width=80, height=80, bg='white')
-                poke_sprite_display.create_image(40, 40, image=self.pokemon_data.pokemon_evolution_display_image[-1])
-                poke_sprite_display.image = self.pokemon_data.pokemon_evolution_display_image[-1]
-                self.pokemon_data.pokemon_evolution_sprite.append(poke_sprite_display)
-                poke_sprite_display.grid(column=i, row=1)
+                poke_evolution = Button(self.pokemon_frames.evolution_frame, text=pokemon_evolution.name, image=self.pokemon_data.pokemon_evolution_display_image[-1], compound='top', command=lambda: self.updatePokemonWidgets(pokemon_evolution.name))
+                poke_evolution.grid(column=i, row=1)
+                self.pokemon_data.pokemon_evolution_button.append(poke_evolution)
             except IndexError:
                 print("No sprite avablible")
-            label = Label(self.pokemon_frames.evolution_frame, text=pokemon_evolution.name)
-            self.pokemon_data.pokemon_evolution_name.append(label)
-            label.grid(column=i, row=2)
-
             i = i+1
             
         self.pokemon_data.pokemon_egg_cycles_var.set(str(pokemon.egg_cycles))
