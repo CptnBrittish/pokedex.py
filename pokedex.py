@@ -99,33 +99,25 @@ class Application(Frame):
 
         
         # Pokemon name
-        self.pokemon_name_label = Label(self.pokemon_frames.basic_info_frame, text="Name:", width=12)
-        self.pokemon_name_label.grid(column=0, row=0)
+        self.pokemon_name_label = Label(self.pokemon_frames.basic_info_frame, text="Name:", width=12).grid(column=0, row=0)
 
-        self.pokemon_name = Label(self.pokemon_frames.basic_info_frame, textvariable=self.pokemon_data.pokemon_name_var, width=12)
-        self.pokemon_name.grid(column=1, row=0)
+        self.pokemon_name = Label(self.pokemon_frames.basic_info_frame, textvariable=self.pokemon_data.pokemon_name_var, width=12).grid(column=1, row=0)
 
 
         # Pokemon national id
-        self.pokemon_number_label = Label(self.pokemon_frames.basic_info_frame, text="National Id:", width=12)
-        self.pokemon_number_label.grid(column=0, row=1)
+        self.pokemon_number_label = Label(self.pokemon_frames.basic_info_frame, text="National Id:", width=12).grid(column=0, row=1)
 
-        self.pokemon_number = Label(self.pokemon_frames.basic_info_frame, textvariable=self.pokemon_data.pokemon_number_var, width=12)
-        self.pokemon_number.grid(column=1, row=1)
+        self.pokemon_number = Label(self.pokemon_frames.basic_info_frame, textvariable=self.pokemon_data.pokemon_number_var, width=12).grid(column=1, row=1)
 
         # Pokemon Species
-        self.pokemon_species_label = Label(self.pokemon_frames.basic_info_frame, text="Species:", width=12)
-        self.pokemon_species_label.grid(column=0, row=2)
+        self.pokemon_species_label = Label(self.pokemon_frames.basic_info_frame, text="Species:", width=12).grid(column=0, row=2)
 
-        self.pokemon_species = Label(self.pokemon_frames.basic_info_frame, textvariable=self.pokemon_data.pokemon_species_var, width=12)
-        self.pokemon_species.grid(column=1, row=2)
+        self.pokemon_species = Label(self.pokemon_frames.basic_info_frame, textvariable=self.pokemon_data.pokemon_species_var, width=12).grid(column=1, row=2)
 
         # Pokemon gende ratio
-        self.pokemon_gender_label = Label(self.pokemon_frames.basic_info_frame, text="Gender Ratio:", width=12)
-        self.pokemon_gender_label.grid(column=0, row=4)
+        self.pokemon_gender_label = Label(self.pokemon_frames.basic_info_frame, text="Gender Ratio:", width=12).grid(column=0, row=4)
 
-        self.pokemon_gender = Label(self.pokemon_frames.basic_info_frame, textvariable=self.pokemon_data.pokemon_gender_var, width=12)
-        self.pokemon_gender.grid(column=1, row=4)
+        self.pokemon_gender = Label(self.pokemon_frames.basic_info_frame, textvariable=self.pokemon_data.pokemon_gender_var, width=12).grid(column=1, row=4)
 
         self.pokemon_catch_rate_label = Label(self.pokemon_frames.basic_info_frame, text="Catch Rate:", width=12)
         self.pokemon_catch_rate_label.grid(column=0, row=5)
@@ -140,82 +132,56 @@ class Application(Frame):
         self.poke_sprite_display.grid(column=1, row=0)
 
 
-        self.description = Label(self.pokemon_frames.description_frame, text="Description")
-        self.description.grid(column=0, row=0, columnspan=2)
+        self.description = Label(self.pokemon_frames.description_frame, text="Description").grid(column=0, row=0, columnspan=2)
 
         # Height and Weight
-        self.pokemon_height_label = Label(self.pokemon_frames.description_frame, text="Height:")
-        self.pokemon_height_label.grid(column=0, row=1)
+        self.pokemon_height_label = Label(self.pokemon_frames.description_frame, text="Height:").grid(column=0, row=1)
 
-        self.pokemon_height = Label(self.pokemon_frames.description_frame, textvariable=self.pokemon_data.pokemon_height_var, width=19)
-        self.pokemon_height.grid(column=1, row=1)
+        self.pokemon_height = Label(self.pokemon_frames.description_frame, textvariable=self.pokemon_data.pokemon_height_var, width=19).grid(column=1, row=1)
 
-        self.pokemon_weight_label = Label(self.pokemon_frames.description_frame, text="Weight:")
-        self.pokemon_weight_label.grid(column=0, row=2)
+        self.pokemon_weight_label = Label(self.pokemon_frames.description_frame, text="Weight:").grid(column=0, row=2)
 
-        self.pokemon_weight = Label(self.pokemon_frames.description_frame, textvariable=self.pokemon_data.pokemon_weight_var, width=19)
-        self.pokemon_weight.grid(column=1, row=2)
+        self.pokemon_weight = Label(self.pokemon_frames.description_frame, textvariable=self.pokemon_data.pokemon_weight_var, width=19).grid(column=1, row=2)
 
         # Description
 
-        self.pokemon_description = Label(self.pokemon_frames.description_frame, textvariable=self.pokemon_data.pokemon_description_var, wraplength=170)
-        self.pokemon_description.grid(column=0, row=3, columnspan=2, rowspan=8)
+        self.pokemon_description = Label(self.pokemon_frames.description_frame, textvariable=self.pokemon_data.pokemon_description_var, wraplength=170).grid(column=0, row=3, columnspan=2, rowspan=8)
 
         # Stats
-        self.pokemon_hp_label = Label(self.pokemon_frames.stats_frame, text="HP", width=10)
-        self.pokemon_hp_label.grid(column=0, row=0)
-        self.pokemon_hp = Label(self.pokemon_frames.stats_frame, textvariable=self.pokemon_data.pokemon_hp_var)
-        self.pokemon_hp.grid(column=1, row=0)
+        self.pokemon_hp_label = Label(self.pokemon_frames.stats_frame, text="HP", width=10).grid(column=0, row=0)
+        self.pokemon_hp = Label(self.pokemon_frames.stats_frame, textvariable=self.pokemon_data.pokemon_hp_var).grid(column=1, row=0)
 
-        self.pokemon_attack_label = Label(self.pokemon_frames.stats_frame, text="Attack", width=10)
-        self.pokemon_attack_label.grid(column=0, row=1)
-        self.pokemon_attack = Label(self.pokemon_frames.stats_frame, textvariable=self.pokemon_data.pokemon_attack_var)
-        self.pokemon_attack.grid(column=1, row=1)
+        self.pokemon_attack_label = Label(self.pokemon_frames.stats_frame, text="Attack", width=10).grid(column=0, row=1)
+        self.pokemon_attack = Label(self.pokemon_frames.stats_frame, textvariable=self.pokemon_data.pokemon_attack_var).grid(column=1, row=1)
 
-        self.pokemon_defense_label = Label(self.pokemon_frames.stats_frame, text="Defense",width=10)
-        self.pokemon_defense_label.grid(column=0, row=2)
-        self.pokemon_defense = Label(self.pokemon_frames.stats_frame, textvariable=self.pokemon_data.pokemon_defense_var)
-        self.pokemon_defense.grid(column=1, row=2)
+        self.pokemon_defense_label = Label(self.pokemon_frames.stats_frame, text="Defense",width=10).grid(column=0, row=2)
+        self.pokemon_defense = Label(self.pokemon_frames.stats_frame, textvariable=self.pokemon_data.pokemon_defense_var).grid(column=1, row=2)
 
-        self.pokemon_sp_attack_label = Label(self.pokemon_frames.stats_frame, text="Sp Attack", width=10)
-        self.pokemon_sp_attack_label.grid(column=0, row=3)
-        self.pokemon_sp_attack = Label(self.pokemon_frames.stats_frame, textvariable=self.pokemon_data.pokemon_sp_attack_var)
-        self.pokemon_sp_attack.grid(column=1, row=3)
+        self.pokemon_sp_attack_label = Label(self.pokemon_frames.stats_frame, text="Sp Attack", width=10).grid(column=0, row=3)
+        self.pokemon_sp_attack = Label(self.pokemon_frames.stats_frame, textvariable=self.pokemon_data.pokemon_sp_attack_var).grid(column=1, row=3)
 
-        self.pokemon_sp_defense_label = Label(self.pokemon_frames.stats_frame, text="Sp Defense",width=10)
-        self.pokemon_sp_defense_label.grid(column=0, row=4)
-        self.pokemon_sp_defense = Label(self.pokemon_frames.stats_frame, textvariable=self.pokemon_data.pokemon_sp_defense_var)
-        self.pokemon_sp_defense.grid(column=1, row=4)
+        self.pokemon_sp_defense_label = Label(self.pokemon_frames.stats_frame, text="Sp Defense",width=10).grid(column=0, row=4)
+        self.pokemon_sp_defense = Label(self.pokemon_frames.stats_frame, textvariable=self.pokemon_data.pokemon_sp_defense_var).grid(column=1, row=4)
 
-        self.pokemon_speed_label = Label(self.pokemon_frames.stats_frame, text="Speed", width=10)
-        self.pokemon_speed_label.grid(column=0, row=5)
-        self.pokemon_speed = Label(self.pokemon_frames.stats_frame, textvariable=self.pokemon_data.pokemon_speed_var)
-        self.pokemon_speed.grid(column=1, row=5)
+        self.pokemon_speed_label = Label(self.pokemon_frames.stats_frame, text="Speed", width=10).grid(column=0, row=5)
+        self.pokemon_speed = Label(self.pokemon_frames.stats_frame, textvariable=self.pokemon_data.pokemon_speed_var).grid(column=1, row=5)
 
 
         # Evolutions
-        self.evolution_label = Label(self.pokemon_frames.evolution_frame, text="Evolutions")
-        self.evolution_label.grid(row=0, sticky=W+E)
+        self.evolution_label = Label(self.pokemon_frames.evolution_frame, text="Evolutions").grid(row=0, sticky=W+E)
 
 
-        self.pokemon_growth_rate_label = Label(self.pokemon_frames.egg_frame, text="Growth Rate:", width=12)
-        self.pokemon_growth_rate_label.grid(column=0, row =0)
-        self.pokemon_growth_rate = Label(self.pokemon_frames.egg_frame, textvariable=self.pokemon_data.pokemon_growth_rate_var, width=17)
-        self.pokemon_growth_rate.grid(column=1, row=0)
+        self.pokemon_growth_rate_label = Label(self.pokemon_frames.egg_frame, text="Growth Rate:", width=12).grid(column=0, row =0)
+        self.pokemon_growth_rate = Label(self.pokemon_frames.egg_frame, textvariable=self.pokemon_data.pokemon_growth_rate_var, width=17).grid(column=1, row=0)
 
-        self.pokemon_egg_cycles_label = Label(self.pokemon_frames.egg_frame, text="Egg Cycles:",width=12)
-        self.pokemon_egg_cycles_label.grid(column=0, row=1)
-        self.pokemon_egg_cycles = Label(self.pokemon_frames.egg_frame, textvariable=self.pokemon_data.pokemon_egg_cycles_var, width=17)
-        self.pokemon_egg_cycles.grid(column=1, row=1)
+        self.pokemon_egg_cycles_label = Label(self.pokemon_frames.egg_frame, text="Egg Cycles:",width=12).grid(column=0, row=1)
+        self.pokemon_egg_cycles = Label(self.pokemon_frames.egg_frame, textvariable=self.pokemon_data.pokemon_egg_cycles_var, width=17).grid(column=1, row=1)
 
-        self.pokemon_egg_group_label = Label(self.pokemon_frames.egg_frame, text="Egg Group:", width=12)
-        self.pokemon_egg_group_label.grid(column=0, row=2)
-        self.pokemon_egg_group = Label(self.pokemon_frames.egg_frame, textvariable=self.pokemon_data.pokemon_egg_group_var, width=17)
-        self.pokemon_egg_group.grid(column=1, row=2)
+        self.pokemon_egg_group_label = Label(self.pokemon_frames.egg_frame, text="Egg Group:", width=12).grid(column=0, row=2)
+        self.pokemon_egg_group = Label(self.pokemon_frames.egg_frame, textvariable=self.pokemon_data.pokemon_egg_group_var, width=17).grid(column=1, row=2)
 
         # Pokemon Abilities
-        self.pokemon_abilities_label = Label(self.pokemon_frames.abilities_frame, text="Abilities")
-        self.pokemon_abilities_label.grid(column=0, row=0, columnspan=2)
+        self.pokemon_abilities_label = Label(self.pokemon_frames.abilities_frame, text="Abilities").grid(column=0, row=0, columnspan=2)
 
         #Notes
         self.pokemon_notes = tkst.ScrolledText(self.pokemon_frames.note_frame)
